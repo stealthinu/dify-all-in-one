@@ -5,6 +5,12 @@ services:
   worker:
     image: dify-api:latest
 
+  db:
+    ports:
+      - '${DB_PORT:-5432}:${DB_PORT:-5432}'
+
+  # Simple File Server
+
   # ffmpeg-api service
   ffmpeg-api:
     image: ffmpeg-api:latest
@@ -12,6 +18,7 @@ services:
     networks:
       - default
 
+  # AivisSpeech-Engine service
   aivisspeech-engine:
     image: ghcr.io/aivis-project/aivisspeech-engine:nvidia-latest
     restart: always
@@ -43,6 +50,8 @@ services:
     ports:
       - "8000:8000"
     restart: unless-stopped
+
+  # AI Tuber Kit
 
 volumes:
   hugging_face_cache:
